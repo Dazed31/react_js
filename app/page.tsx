@@ -1,13 +1,17 @@
+'use client'
+import { useState } from "react";
 import React from 'react';
 import { Film, Clapperboard } from 'lucide-react';
 
 const Card = ({ title, useClapper }) => {
+  const [hasLiked, sethasLiked] = useState(false);
   const Icon = useClapper ? Clapperboard : Film;
 
   return (
     <div style={styles.card}>
       <Icon size={28} style={styles.icon} />
       <h2 style={styles.title}>{title}</h2>
+      <button style={styles.button} onClick={() => sethasLiked(!hasLiked)}>{hasLiked ? '💖': '🤍'}</button>
     </div>
   );
 };
@@ -33,7 +37,7 @@ const styles = {
     padding: '2rem',
     fontFamily: 'sans-serif',
     backgroundColor: '#fff',
-    color: '#111', // ensures all text is visible
+    color: '#111', 
   },
   header: {
     marginBottom: '1.5rem',
@@ -63,6 +67,42 @@ const styles = {
     color: '#111',
     margin: 0,
   },
+  button: {
+  border: 'none',
+  fontSize: '15px',
+  backgroundColor: 'transparent',
+  width: '20%',
+  textAlign: 'right',
+  cursor: 'pointer'
+}
 };
 
+
 export default App;
+
+/*'use client'
+import { useState } from "react";
+
+const Card = ({title}) => {
+   const [hasLiked, sethasLiked] = useState(false);
+  return(
+    <div className="card">
+      <h2>{title}</h2>
+      <button onClick={() => sethasLiked(!hasLiked)}>{hasLiked ? '💖': '🤍'}</button>
+    </div>
+  );
+};
+
+
+const App = () =>{
+ 
+  return(
+    <div className="cardcontainer">
+        <Card title = "Stranger Things"/>
+        <Card title = "Alice in Borderland"/>
+        <Card title = "Sinners"/>
+      </div>
+  );
+};
+
+export default App;*/
