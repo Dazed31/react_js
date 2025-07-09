@@ -1,17 +1,25 @@
 'use client'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from 'react';
 import { Film, Clapperboard } from 'lucide-react';
+import { count } from "console";
 
 const Card = ({ title, useClapper }) => {
+  const [count, setcount] = useState(0)
   const [hasLiked, sethasLiked] = useState(false);
+  useEffect(() => {
+         console.log(`${title} has been ${hasLiked ? 'liked' : 'unliked'}`);
+  }, [hasLiked]);
+  
   const Icon = useClapper ? Clapperboard : Film;
 
   return (
-    <div style={styles.card}>
+    <div onClick={() => setcount(count+1)} style={styles.card}>
       <Icon size={28} style={styles.icon} />
-      <h2 style={styles.title}>{title}</h2>
+      <h2 style={styles.title}>{title} 
+      </h2>
       <button style={styles.button} onClick={() => sethasLiked(!hasLiked)}>{hasLiked ? '💖': '🤍'}</button>
+        {count}
     </div>
   );
 };
